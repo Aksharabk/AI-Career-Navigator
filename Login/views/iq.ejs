@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IQ Test | DREAMPATH AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .iq-container {
+      background: white;
+      width: 92%;
+      max-width: 720px;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    /* START SCREEN */
+    .start-screen {
+      text-align: center;
+    }
+
+    .start-screen p {
+      font-size: 15px;
+      color: #555;
+      margin: 10px 0;
+    }
+
+    .start-screen ul {
+      text-align: left;
+      margin: 15px auto;
+      max-width: 450px;
+      color: #444;
+    }
+
+    .start-btn {
+      margin-top: 20px;
+      padding: 14px 25px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .start-btn:hover {
+      background: #5a6fd8;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 14px;
+      color: #555;
+      display: none;
+    }
+
+    .timer {
+      font-weight: bold;
+      color: #764ba2;
+    }
+
+    .progress {
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 25px;
+      display: none;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      transition: 0.4s;
+    }
+
+    .question {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .options button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: #f9f9ff;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.3s;
+      text-align: left;
+    }
+
+    .options button.selected {
+      background: #eef2ff;
+      border-color: #667eea;
+    }
+
+    .options button:hover {
+      background: #eef2ff;
+    }
+
+    .next-btn {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      cursor: pointer;
+      display: none;
+    }
+
+    .next-btn:hover {
+      background: #5a6fd8;
+    }
+
+    .done-screen {
+      display: none;
+      text-align: center;
+    }
+
+    .done-screen h3 {
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+
+    .score {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #667eea;
+    }
+
+    .done-actions button {
+      padding: 12px 18px;
+      margin: 8px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .done-actions button:hover {
+      background: #5a6fd8;
+    }
+  </style>
+</head>
+<body>
+
+<div class="iq-container">
+
+  <h2>🧠 IQ / Aptitude Test</h2>
+
+  <!-- START SCREEN -->
+  <div class="start-screen" id="startScreen">
+    <p>This test evaluates your logical and aptitude skills.</p>
+    <ul>
+      <li>Total Questions: 10</li>
+      <li>Time per question: 15 seconds</li>
+      <li>No negative marking</li>
+      <li>Test auto-moves if time expires</li>
+    </ul>
+    <button class="start-btn" onclick="startTest()">Start Test</button>
+  </div>
+
+  <!-- TOP BAR -->
+  <div class="top-bar" id="topBar">
+    <div id="qCount">Question 1 / 10</div>
+    <div class="timer">⏱ <span id="time">15</span>s</div>
+  </div>
+
+  <div class="progress" id="progressWrap">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz" style="display:none;">
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next</button>
+  </div>
+
+  <!-- DONE SCREEN -->
+  <div class="done-screen" id="doneScreen">
+    <h3>✅ Test Completed</h3>
+    <div class="score" id="scoreText"></div>
+    <p>Use your performance to explore suitable career paths.</p>
+
+    <div class="done-actions">
+      <button onclick="goToCareer()">Go to Career Recommendation</button>
+      <button onclick="goToDashboard()">Go to Dashboard</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const questionBank = [
+    { q: "What comes next: 2, 4, 8, 16, ?", options: ["18", "24", "32", "30"], ans: "32" },
+    { q: "Which is the odd one out?", options: ["3", "5", "11", "14"], ans: "14" },
+    { q: "Find missing number: 1, 4, 9, 16, ?", options: ["20", "25", "36", "30"], ans: "25" },
+    { q: "If ALL roses are flowers, are all flowers roses?", options: ["Yes", "No", "Sometimes", "Depends"], ans: "No" },
+    { q: "What is 15% of 200?", options: ["20", "25", "30", "35"], ans: "30" },
+    { q: "Which number is smallest?", options: ["0.5", "0.05", "0.005", "0.0005"], ans: "0.0005" },
+    { q: "Find the next letter: A, C, E, G, ?", options: ["H", "I", "J", "K"], ans: "I" },
+    { q: "A clock shows 3:15. Angle between hands?", options: ["0°", "7.5°", "30°", "37.5°"], ans: "7.5°" },
+    { q: "If 5x = 20, x = ?", options: ["2", "3", "4", "5"], ans: "4" },
+    { q: "Which is NOT a prime number?", options: ["13", "17", "21", "19"], ans: "21" },
+    { q: "Which comes next: Z, X, V, ?", options: ["T", "S", "U", "R"], ans: "T" },
+    { q: "Which is heavier?", options: ["1kg iron", "1kg cotton", "Both same", "Depends"], ans: "Both same" },
+    { q: "If today is Monday, day after 9 days?", options: ["Tuesday", "Wednesday", "Thursday", "Friday"], ans: "Wednesday" }
+  ];
+
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  const questions = shuffle([...questionBank]).slice(0, 10);
+
+  let index = 0, score = 0, selected = null;
+  let time = 15, timer;
+
+  const questionEl = document.getElementById("question");
+  const optionsEl = document.getElementById("options");
+  const progressBar = document.getElementById("progressBar");
+  const nextBtn = document.getElementById("nextBtn");
+  const timeEl = document.getElementById("time");
+  const qCount = document.getElementById("qCount");
+
+  function startTest() {
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    document.getElementById("topBar").style.display = "flex";
+    document.getElementById("progressWrap").style.display = "block";
+    loadQuestion();
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    time = 15;
+    timeEl.innerText = time;
+
+    timer = setInterval(() => {
+      time--;
+      timeEl.innerText = time;
+      if (time === 0) {
+        clearInterval(timer);
+        nextQuestion();
+      }
+    }, 1000);
+  }
+
+  function loadQuestion() {
+    selected = null;
+    nextBtn.style.display = "none";
+    optionsEl.innerHTML = "";
+
+    const q = questions[index];
+    questionEl.innerText = q.q;
+    qCount.innerText = `Question ${index + 1} / ${questions.length}`;
+
+    q.options.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.innerText = opt;
+      btn.onclick = () => selectOption(btn, opt);
+      optionsEl.appendChild(btn);
+    });
+
+    progressBar.style.width = ((index / questions.length) * 100) + "%";
+    startTimer();
+  }
+
+  function selectOption(btn, opt) {
+    document.querySelectorAll(".options button").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    selected = opt;
+    nextBtn.style.display = "block";
+  }
+
+  function nextQuestion() {
+    clearInterval(timer);
+    if (selected === questions[index].ans) score++;
+    index++;
+
+    if (index < questions.length) {
+      loadQuestion();
+    } else {
+      finishTest();
+    }
+  }
+
+  function finishTest() {
+    document.getElementById("quiz").style.display = "none";
+    document.getElementById("doneScreen").style.display = "block";
+    progressBar.style.width = "100%";
+    document.getElementById("scoreText").innerText =
+      `Your Score: ${score} / ${questions.length}`;
+  }
+
+  function goToCareer() {
+    window.location.href = "http://127.0.0.1:5000/";
+  }
+
+  function goToDashboard() {
+    window.location.href = "/dashboard";
+  }
+</script>
+
+</body>
+</html>

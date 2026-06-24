@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6fb;
+    }
+
+    .dashboard {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 90px;
+      background: linear-gradient(180deg, #667eea, #764ba2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    /* PROFILE ICON */
+    .profile-icon {
+      width: 55px;
+      height: 55px;
+      background: white;
+      color: #667eea;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 40px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .profile-icon:hover {
+      transform: scale(1.08);
+    }
+
+    /* NAV ICONS */
+    .nav-icon {
+      color: white;
+      font-size: 20px;
+      margin: 22px 0;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .nav-icon:hover {
+      color: #ffd6ff;
+      transform: scale(1.15);
+    }
+
+    /* MAIN */
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 35px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    .header p {
+      margin-top: 6px;
+      opacity: 0.9;
+    }
+
+    /* CARDS */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+    }
+
+    .card-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 14px;
+      background: #eef2ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      font-size: 24px;
+      color: #667eea;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      color: #333;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 70px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- PROFILE ROUND ICON -->
+    <a href="/profile" class="profile-icon" title="Profile">
+      <i class="fa-solid fa-user"></i>
+    </a>
+
+    <!-- NAVIGATION ICONS -->
+    <a href="/dashboard" class="nav-icon" title="Home">
+      <i class="fa-solid fa-house"></i>
+    </a>
+
+    <a href="/iq" class="nav-icon" title="IQ Test">
+      <i class="fa-solid fa-brain"></i>
+    </a>
+
+    <a href="/chat" class="nav-icon" title="Chat Assistant">
+      <i class="fa-solid fa-comments"></i>
+    </a>
+
+    <a href="/logout" class="nav-icon" title="Logout">
+      <i class="fa-solid fa-right-from-bracket"></i>
+    </a>
+
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <div class="header">
+      <h1>Welcome, <%= name %> 👋</h1>
+      <p>Explore your career journey with AI-powered guidance</p>
+    </div>
+
+    <div class="card-grid">
+
+      <a href="http://127.0.0.1:5000/" class="card">
+        <div class="card-icon">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </div>
+        <h3>Enter Details</h3>
+        <p>Share your interests and skills to receive personalized career suggestions.</p>
+      </a>
+
+      <a href="/iq" class="card">
+        <div class="card-icon">
+          <i class="fa-solid fa-brain"></i>
+        </div>
+        <h3>IQ / Aptitude Test</h3>
+        <p>Evaluate your logical thinking and aptitude level.</p>
+      </a>
+
+      <a href="/take-test" class="card">
+
+        <div class="card-icon">
+          <i class="fa-solid fa-clipboard-question"></i>
+        </div>
+        <h3>Take a Test</h3>
+        <p>Test your knowledge through interactive quizzes.</p>
+      </a>
+
+      <a href="/chat" class="card">
+        <div class="card-icon">
+          <i class="fa-solid fa-robot"></i>
+        </div>
+        <h3>Chat Assistance</h3>
+        <p>Get instant help and career guidance from AI assistant.</p>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

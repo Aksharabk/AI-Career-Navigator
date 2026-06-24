@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Career Input</title>
+
+<style>
+body {
+  font-family: 'Segoe UI';
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  margin: 0;
+}
+
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 60px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #5a6fd8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🎯 Career Input</h2>
+
+<form action="/recommend" method="POST">
+
+<label>Skills:</label>
+<input type="text" name="skills" placeholder="Ex: java, python, sql" required>
+
+<label>Interests:</label>
+<input type="text" placeholder="Ex: coding, design">
+
+<label>Favourite Subject:</label>
+<input type="text" placeholder="Ex: DBMS">
+
+<button type="submit">Recommend Careers</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

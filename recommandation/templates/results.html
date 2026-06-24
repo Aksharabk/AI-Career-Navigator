@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Career Results</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.container {
+  width: 92%;
+  max-width: 1200px;
+  margin: 40px auto;
+  background: #f8f9ff;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+/* LEFT SIDE */
+.card {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 14px;
+  margin-bottom: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+.card-title {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.match {
+  float: right;
+  background: #eef2ff;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #333;
+}
+
+/* RIGHT SIDE */
+.side-card {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 14px;
+  margin-bottom: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+ul {
+  padding-left: 18px;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #5a6fd8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🎯 Your Recommended Careers</h2>
+
+<div class="grid">
+
+<!-- LEFT SIDE -->
+<div>
+
+  {% for r in results %}
+  <div class="card">
+    <div class="card-title">
+      {{ r.career }}
+      <span class="match">Match: {{ r.confidence }}%</span>
+    </div>
+
+    <p><b>Why it fits you:</b></p>
+    <ul>
+      {% for reason in r.reasons %}
+      <li>{{ reason }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+
+  <!-- SKILL GAP -->
+  <div class="card">
+    <b>📊 Skills Gap Analysis:</b>
+    <ul>
+      {% for r in results %}
+        {% for skill in r.missing_skills[:3] %}
+        <li>{{ skill }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+
+</div>
+
+<!-- RIGHT SIDE -->
+<div>
+
+  <!-- ROADMAP -->
+  <div class="side-card">
+    <b>📚 Recommended Learning Path</b>
+    <ul>
+      {% for step in results[0].roadmap %}
+      <li>{{ step }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- TIPS -->
+  <div class="side-card">
+    <b>💡 Placement Tips</b>
+    <ul>
+      <li>Practice aptitude daily</li>
+      <li>Revise DBMS & OOP</li>
+      <li>Prepare HR questions</li>
+    </ul>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="side-card">
+    <b>🚀 Suggested Projects</b>
+    <ul>
+      <li>Task Manager App</li>
+      <li>REST API System</li>
+    </ul>
+  </div>
+
+  <button class="btn" onclick="window.location.href='/dashboard'">
+    Go to Dashboard
+  </button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+    function goDashboard(){
+      window.location.href = "http://localhost:8080/dashboard";
+    }
+    </script>
+
+</body>
+</html>
