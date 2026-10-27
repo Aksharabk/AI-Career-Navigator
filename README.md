@@ -1,4 +1,4 @@
-<h1>AI Career Navigator</h1>
+<h1>AI-POWERED CAREER GUIDANCE AND EMPLOYABILITY ENHANCEMENT PLATFORM</h1>
 
 Installation packages required: express, MongoDB, mongoose, body-parser, ejs, nodemon
 
