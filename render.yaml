@@ -1,0 +1,31 @@
+services:
+  # 1. Python Flask Career Recommendation Service
+  - type: web
+    name: ai-career-recommendation
+    runtime: python
+    rootDir: recommandation
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12
+
+  # 2. Node.js Express Main Web Application
+  - type: web
+    name: ai-career-navigator
+    runtime: node
+    rootDir: Login
+    plan: free
+    buildCommand: npm install
+    startCommand: node app.js
+    envVars:
+      - key: PORT
+        value: 4000
+      - key: MONGO_URI
+        value: mongodb+srv://maheethasakthivel22_db_user:WCW4wEK7FaD8sIXU@cluster0.fotjdst.mongodb.net/ai_career?retryWrites=true&w=majority
+      - key: RECOMMENDATION_URL
+        fromService:
+          type: web
+          name: ai-career-recommendation
+          property: host
