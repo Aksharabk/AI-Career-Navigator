@@ -60,7 +60,11 @@ app.set("views", path.join(__dirname, "views"));
 
 // Middleware to inject recommendation URL dynamically
 app.use((req, res, next) => {
-  res.locals.recommendationUrl = process.env.RECOMMENDATION_URL || "http://127.0.0.1:5001";
+  let recUrl = process.env.RECOMMENDATION_URL || "http://127.0.0.1:5001";
+  if (!recUrl.startsWith("http://") && !recUrl.startsWith("https://")) {
+    recUrl = "https://" + recUrl;
+  }
+  res.locals.recommendationUrl = recUrl;
   next();
 });
 
