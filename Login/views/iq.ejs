@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>IQ Test | DREAMPATH AI</title>
+  <title>IQ Test | AI-POWERED CAREER GUIDANCE AND EMPLOYABILITY ENHANCEMENT PLATFORM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
     body {
@@ -174,7 +175,7 @@
 
 <div class="iq-container">
 
-  <h2>🧠 IQ / Aptitude Test</h2>
+  <h2><i class="fa-solid fa-brain" style="color: #667eea; margin-right: 8px;"></i>IQ / Aptitude Test</h2>
 
   <!-- START SCREEN -->
   <div class="start-screen" id="startScreen">
@@ -185,13 +186,13 @@
       <li>No negative marking</li>
       <li>Test auto-moves if time expires</li>
     </ul>
-    <button class="start-btn" onclick="startTest()">Start Test</button>
+    <button class="start-btn" onclick="startTest()"><i class="fa-solid fa-play" style="margin-right: 6px;"></i>Start Test</button>
   </div>
 
   <!-- TOP BAR -->
   <div class="top-bar" id="topBar">
     <div id="qCount">Question 1 / 10</div>
-    <div class="timer">⏱ <span id="time">15</span>s</div>
+    <div class="timer"><i class="fa-solid fa-stopwatch" style="margin-right: 5px;"></i><span id="time">15</span>s</div>
   </div>
 
   <div class="progress" id="progressWrap">
@@ -207,13 +208,13 @@
 
   <!-- DONE SCREEN -->
   <div class="done-screen" id="doneScreen">
-    <h3>✅ Test Completed</h3>
+    <h3><i class="fa-solid fa-circle-check" style="color: #10b981; margin-right: 8px;"></i>Test Completed</h3>
     <div class="score" id="scoreText"></div>
     <p>Use your performance to explore suitable career paths.</p>
 
     <div class="done-actions">
-      <button onclick="goToCareer()">Go to Career Recommendation</button>
-      <button onclick="goToDashboard()">Go to Dashboard</button>
+      <button onclick="goToCareer()"><i class="fa-solid fa-compass" style="margin-right: 6px;"></i>Go to Career Recommendation</button>
+      <button onclick="goToDashboard()"><i class="fa-solid fa-arrow-left" style="margin-right: 6px;"></i>Go to Dashboard</button>
     </div>
   </div>
 
@@ -327,7 +328,7 @@
   }
 
   function goToCareer() {
-    window.location.href = "http://127.0.0.1:5000/";
+    window.location.href = "<%= recommendationUrl %>";
   }
 
   function goToDashboard() {

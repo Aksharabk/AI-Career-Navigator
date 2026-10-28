@@ -14,12 +14,27 @@ const path = require("path");
 
 const User = require("./models/User");
 const homeRouter = require("./routers/homeRouter");
+const triviaRouter = require("./routers/triviaRouter");
+const resumeRouter = require("./routers/resumeRouter");
 
 // ============================
 // APP INIT
 // ============================
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// ============================
+// CORS & HEADERS
+// ============================
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
 // ============================
 // MIDDLEWARE
@@ -37,10 +52,17 @@ app.use(
 
 // Static
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/trivia-app", express.static(path.join(__dirname, "../Trivia")));
 
 // View Engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+
+// Middleware to inject recommendation URL dynamically
+app.use((req, res, next) => {
+  res.locals.recommendationUrl = process.env.RECOMMENDATION_URL || "http://127.0.0.1:5001";
+  next();
+});
 
 // ============================
 // 🔥 DATABASE CONNECTION (FIXED)
@@ -57,6 +79,8 @@ mongoose
 // ============================
 // ROUTES
 // ============================
+app.use("/api/trivia", triviaRouter);
+app.use("/", resumeRouter);
 app.use("/", homeRouter);
 
 // ============================
@@ -110,6 +134,21 @@ app.get("/chat", (req, res) => {
 app.get("/take-test", (req, res) => {
   if (!req.session.userId) return res.redirect("/");
   res.render("takeTest");
+});
+
+// ============================
+// TRIVIA QUIZ
+// ============================
+app.get("/trivia", async (req, res) => {
+  let user = null;
+  if (req.session.userId) {
+    user = await User.findById(req.session.userId).lean();
+  }
+  res.render("trivia", {
+    user: user,
+    name: user ? user.name : "Guest",
+    isLoggedIn: !!req.session.userId
+  });
 });
 
 // ============================

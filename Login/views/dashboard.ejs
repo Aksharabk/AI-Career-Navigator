@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard</title>
+  <title>Dashboard | AI-POWERED CAREER GUIDANCE AND EMPLOYABILITY ENHANCEMENT PLATFORM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -98,7 +99,7 @@
       background: white;
       border-radius: 18px;
       padding: 28px;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s, box-shadow 0.3s;
       text-decoration: none;
       color: inherit;
@@ -106,7 +107,7 @@
 
     .card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
     }
 
     .card-icon {
@@ -140,83 +141,119 @@
     }
   </style>
 </head>
+
 <body>
 
-<div class="dashboard">
+  <div class="dashboard">
 
-  <!-- SIDEBAR -->
-  <div class="sidebar">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
 
-    <!-- PROFILE ROUND ICON -->
-    <a href="/profile" class="profile-icon" title="Profile">
-      <i class="fa-solid fa-user"></i>
-    </a>
-
-    <!-- NAVIGATION ICONS -->
-    <a href="/dashboard" class="nav-icon" title="Home">
-      <i class="fa-solid fa-house"></i>
-    </a>
-
-    <a href="/iq" class="nav-icon" title="IQ Test">
-      <i class="fa-solid fa-brain"></i>
-    </a>
-
-    <a href="/chat" class="nav-icon" title="Chat Assistant">
-      <i class="fa-solid fa-comments"></i>
-    </a>
-
-    <a href="/logout" class="nav-icon" title="Logout">
-      <i class="fa-solid fa-right-from-bracket"></i>
-    </a>
-
-  </div>
-
-  <!-- MAIN -->
-  <div class="main">
-
-    <div class="header">
-      <h1>Welcome, <%= name %> 👋</h1>
-      <p>Explore your career journey with AI-powered guidance</p>
-    </div>
-
-    <div class="card-grid">
-
-      <a href="http://127.0.0.1:5000/" class="card">
-        <div class="card-icon">
-          <i class="fa-solid fa-pen-to-square"></i>
-        </div>
-        <h3>Enter Details</h3>
-        <p>Share your interests and skills to receive personalized career suggestions.</p>
+      <!-- PROFILE ROUND ICON -->
+      <a href="/profile" class="profile-icon" title="Profile">
+        <i class="fa-solid fa-user"></i>
       </a>
 
-      <a href="/iq" class="card">
-        <div class="card-icon">
-          <i class="fa-solid fa-brain"></i>
-        </div>
-        <h3>IQ / Aptitude Test</h3>
-        <p>Evaluate your logical thinking and aptitude level.</p>
+      <!-- NAVIGATION ICONS -->
+      <a href="/dashboard" class="nav-icon" title="Home">
+        <i class="fa-solid fa-house"></i>
       </a>
 
-      <a href="/take-test" class="card">
-
-        <div class="card-icon">
-          <i class="fa-solid fa-clipboard-question"></i>
-        </div>
-        <h3>Take a Test</h3>
-        <p>Test your knowledge through interactive quizzes.</p>
+      <a href="/iq" class="nav-icon" title="IQ Test">
+        <i class="fa-solid fa-brain"></i>
       </a>
 
-      <a href="/chat" class="card">
-        <div class="card-icon">
-          <i class="fa-solid fa-robot"></i>
-        </div>
-        <h3>Chat Assistance</h3>
-        <p>Get instant help and career guidance from AI assistant.</p>
+      <a href="/trivia" class="nav-icon" title="Trivia Quiz">
+        <i class="fa-solid fa-gamepad"></i>
+      </a>
+
+      <a href="/resume-analyzer" class="nav-icon" title="Resume ATS Analyzer">
+        <i class="fa-solid fa-file-invoice"></i>
+      </a>
+
+      <a href="/chat" class="nav-icon" title="Chat Assistant">
+        <i class="fa-solid fa-comments"></i>
+      </a>
+
+      <a href="/logout" class="nav-icon" title="Logout">
+        <i class="fa-solid fa-right-from-bracket"></i>
       </a>
 
     </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <div class="header">
+        <div
+          style="font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; opacity: 0.9; margin-bottom: 6px;">
+          AI-POWERED CAREER GUIDANCE AND EMPLOYABILITY ENHANCEMENT PLATFORM
+        </div>
+        <h1>Welcome, <%= name %> <i class="fa-solid fa-hand" style="color: #fbbf24; font-size: 24px; margin-left: 6px;"></i></h1>
+        <p>Explore your personalized career roadmaps, aptitude analysis, and employability assessments</p>
+      </div>
+
+      <div class="card-grid">
+
+        <a href="/resume-analyzer" class="card"
+          style="border: 1.5px solid #667eea; background: linear-gradient(180deg, #ffffff, #fbfaff);">
+          <div class="card-icon" style="background: linear-gradient(135deg, #ede9fe, #dbeafe); color: #667eea;">
+            <i class="fa-solid fa-file-circle-check"></i>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <h3 style="margin: 0;">AI Resume ATS Analyzer</h3>
+            <span
+              style="background: #10b981; color: white; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 10px;">NEW</span>
+          </div>
+          <p>Upload your resume, get your instant ATS score, detect missing domain keywords, and receive tailored
+            upgrade recommendations based on your interest.</p>
+        </a>
+
+        <a href="<%= recommendationUrl %>" class="card">
+          <div class="card-icon">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </div>
+          <h3>Enter Details</h3>
+          <p>Share your interests and skills to receive personalized career suggestions.</p>
+        </a>
+
+        <a href="/iq" class="card">
+          <div class="card-icon">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <h3>IQ / Aptitude Test</h3>
+          <p>Evaluate your logical thinking and aptitude level.</p>
+        </a>
+
+        <a href="/trivia" class="card">
+          <div class="card-icon">
+            <i class="fa-solid fa-gamepad"></i>
+          </div>
+          <h3>AI Career & Tech Trivia</h3>
+          <p>Test your knowledge with interactive quizzes across CS, Web Dev, AI, Aptitude & General Trivia with score
+            tracking.</p>
+        </a>
+
+        <a href="/take-test" class="card">
+          <div class="card-icon">
+            <i class="fa-solid fa-clipboard-question"></i>
+          </div>
+          <h3>Skill Assessments</h3>
+          <p>Curated assessments tailored to technical domains and tracks.</p>
+        </a>
+
+        <a href="/chat" class="card">
+          <div class="card-icon">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <h3>Chat Assistance</h3>
+          <p>Get instant help and career guidance from AI assistant.</p>
+        </a>
+
+      </div>
+    </div>
   </div>
-</div>
 
 </body>
+
 </html>

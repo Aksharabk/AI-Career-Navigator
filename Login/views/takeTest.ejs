@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Skill & Course Assessments | DREAMPATH AI</title>
+<title>Skill & Course Assessments | AI-POWERED CAREER GUIDANCE AND EMPLOYABILITY ENHANCEMENT PLATFORM</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 body{
@@ -116,19 +117,32 @@ body{
 
 <div class="container">
 
-<div class="header">
-<h1>📘 Skill & Course Assessments</h1>
-<p>Search a course and take advanced assessments</p>
+<div class="header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+<div>
+  <h1><i class="fa-solid fa-book-bookmark" style="margin-right: 10px;"></i>Skill & Course Assessments</h1>
+  <p>Search a course and take advanced assessments</p>
+</div>
+<a href="/trivia" style="background: white; color: #667eea; text-decoration: none; font-weight: bold; padding: 10px 18px; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+  <i class="fa-solid fa-bullseye" style="color: #667eea;"></i> Launch AI Trivia Quiz <i class="fa-solid fa-arrow-right"></i>
+</a>
 </div>
 
 <div class="search-box">
-<input type="text" id="search" placeholder="Search Programming, SQL, Design, Aptitude...">
+<input type="text" id="search" placeholder="Search Programming, SQL, Design, Aptitude, Trivia...">
 </div>
 
 <div class="course-grid" id="courseGrid">
 
+<div class="course-card" data-name="trivia interactive quiz ai aptitude general" style="border: 2px solid #667eea;">
+<h3><i class="fa-solid fa-bullseye" style="color: #667eea; margin-right: 8px;"></i>AI Career & Tech Trivia</h3>
+<p>Live dynamic quiz across CS, Web Dev, AI, Aptitude & General Trivia with score tracking</p>
+<div class="test-list">
+<a href="/trivia" style="display: block; text-align: center; text-decoration: none; padding: 10px; border-radius: 10px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; font-weight: bold;">Launch Trivia Assessment</a>
+</div>
+</div>
+
 <div class="course-card" data-name="programming coding java python">
-<h3>Programming</h3>
+<h3><i class="fa-solid fa-code" style="color: #667eea; margin-right: 8px;"></i>Programming</h3>
 <p>Coding, logic & fundamentals</p>
 <div class="test-list">
 <button onclick="startTest('programming')">Beginner Test 1</button>
@@ -139,7 +153,7 @@ body{
 </div>
 
 <div class="course-card" data-name="data analytics sql">
-<h3>Data & Analytics</h3>
+<h3><i class="fa-solid fa-chart-column" style="color: #667eea; margin-right: 8px;"></i>Data & Analytics</h3>
 <p>SQL, data analysis & logic</p>
 <div class="test-list">
 <button onclick="startTest('data')">Beginner Test</button>
@@ -149,7 +163,7 @@ body{
 </div>
 
 <div class="course-card" data-name="design ui ux">
-<h3>Design & UI/UX</h3>
+<h3><i class="fa-solid fa-palette" style="color: #667eea; margin-right: 8px;"></i>Design & UI/UX</h3>
 <p>Creativity & design thinking</p>
 <div class="test-list">
 <button onclick="startTest('design')">Beginner Test</button>
@@ -159,7 +173,7 @@ body{
 </div>
 
 <div class="course-card" data-name="aptitude reasoning">
-<h3>Aptitude & Reasoning</h3>
+<h3><i class="fa-solid fa-brain" style="color: #667eea; margin-right: 8px;"></i>Aptitude & Reasoning</h3>
 <p>Logical & analytical reasoning</p>
 <div class="test-list">
 <button onclick="startTest('aptitude')">Beginner Test</button>
@@ -170,7 +184,7 @@ body{
 
 </div>
 
-<a href="/dashboard" class="back">← Back to Dashboard</a>
+<a href="/dashboard" class="back"><i class="fa-solid fa-arrow-left" style="margin-right: 6px;"></i>Back to Dashboard</a>
 
 </div>
 

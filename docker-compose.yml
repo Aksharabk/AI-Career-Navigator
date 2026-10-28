@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # Flask Recommendation Service (Python)
+  recommendation-service:
+    build:
+      context: ./recommandation
+      dockerfile: Dockerfile
+    container_name: career-navigator-flask
+    ports:
+      - "5000:5000"
+    restart: always
+
+  # Express/Node.js Web App (served on Port 4000)
+  web-service:
+    build:
+      context: ./Login
+      dockerfile: Dockerfile
+    container_name: career-navigator-express
+    ports:
+      - "4000:4000"
+    environment:
+      # Point to your MongoDB Atlas cluster (or a local MongoDB instance)
+      - MONGO_URI=mongodb+srv://maheethasakthivel22_db_user:WCW4wEK7FaD8sIXU@cluster0.fotjdst.mongodb.net/ai_career?retryWrites=true&w=majority
+      - PORT=4000
+      # Change this to the public URL of the recommendation service in production
+      - RECOMMENDATION_URL=http://localhost:5000
+    depends_on:
+      - recommendation-service
+    restart: always

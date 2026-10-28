@@ -1,45 +1,127 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Quiz App</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-  <div class="select">
-    
-    <div id="quiz-app">
-      <h1>Choose Your Choice Of Category </h1>
-      <div class="category-start">
-      <select id="category-select"></select>
-      <button id="start-quiz-button">Start Quiz</button>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-POWERED CAREER GUIDANCE AND EMPLOYABILITY ENHANCEMENT PLATFORM - Trivia</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-content">
+      <div class="brand-title">
+        <span class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+        <div>
+          <h1 style="font-size: 15px; letter-spacing: 0.2px;">AI-POWERED CAREER GUIDANCE AND EMPLOYABILITY ENHANCEMENT PLATFORM</h1>
+          <p class="subtitle">Interactive Knowledge & Aptitude Assessments</p>
+        </div>
+      </div>
+      <div id="backendStatusBadge" class="backend-badge connecting">
+        <i class="fa-solid fa-circle-notch fa-spin"></i>
+        <span>Connecting to Backend...</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Category & Setup Screen -->
+    <section id="category-section" class="card select-card">
+      <div class="card-header">
+        <h2><i class="fa-solid fa-layer-group"></i> Choose Your Assessment Category</h2>
+        <p>Select a career track or trivia domain to test and benchmark your knowledge.</p>
+      </div>
+
+      <div class="category-form">
+        <div class="form-group">
+          <label for="category-select">Domain / Track:</label>
+          <select id="category-select" class="custom-select">
+            <option value="tech-cs">💻 Computer Science & IT (Career Focus)</option>
+            <option value="tech-web">🌐 Web Development & JavaScript</option>
+            <option value="tech-ai">🤖 Data Science & Artificial Intelligence</option>
+            <option value="aptitude-logic">🧠 Aptitude & Logical Reasoning</option>
+            <option value="18">🔬 Science: Computers</option>
+            <option value="19">📐 Science: Mathematics</option>
+            <option value="9">🌍 General Knowledge</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="question-count-select">Number of Questions:</label>
+          <select id="question-count-select" class="custom-select">
+            <option value="5">5 Questions</option>
+            <option value="10" selected>10 Questions</option>
+            <option value="15">15 Questions</option>
+          </select>
+        </div>
+
+        <button id="start-quiz-button" class="btn btn-primary">
+          <i class="fa-solid fa-play"></i> Start Quiz
+        </button>
+      </div>
+    </section>
+
+    <!-- Quiz Screen -->
+    <section id="quiz-section" class="card quiz-card" style="display: none;">
+      <!-- Stats & Progress Bar -->
+      <div class="quiz-meta-bar">
+        <span id="category-badge" class="badge badge-info">Computer Science</span>
+        <div class="stats-pills">
+          <span class="badge badge-score"><i class="fa-solid fa-star"></i> Score: <strong id="score">0</strong></span>
+          <span class="badge badge-count">Question: <strong id="qs">1</strong> / <strong id="total-qs">10</strong></span>
+        </div>
+      </div>
+
+      <div class="progress-track">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+
+      <!-- Question & Answers Container -->
+      <div id="quiz-app"></div>
+
+      <!-- Navigation & Controls -->
+      <div class="quiz-nav">
+        <button id="prev-button" class="btn btn-secondary">
+          <i class="fa-solid fa-arrow-left"></i> Previous
+        </button>
+        <button id="next-button" class="btn btn-primary">
+          Next <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Result Modal -->
+  <div id="scoreModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="modal-icon">
+        <i class="fa-solid fa-trophy"></i>
+      </div>
+      <h2>Assessment Complete!</h2>
+      <p id="scoreValue" class="score-display">Your Score: 0 / 10</p>
+      <p id="scoreFeedback" class="feedback-text">Great effort!</p>
+
+      <div id="modalBackendSync" class="sync-banner">
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        <span>Syncing result with backend database...</span>
+      </div>
+
+      <div class="modal-actions">
+        <button id="retry-button" class="btn btn-primary">
+          <i class="fa-solid fa-rotate-right"></i> Take Another Test
+        </button>
+        <a id="dashboard-link" href="http://localhost:4000/dashboard" class="btn btn-secondary">
+          <i class="fa-solid fa-house"></i> Go to Dashboard
+        </a>
       </div>
     </div>
   </div>
-   
-  <div class="start">
-		
-    <div class="btns">
-      <button id="prev-button">Previous</button>
-      <button id="next-button">Next</button>
-		
-    </div>
-      <div class="top">
-			<p>SCORE = <span id="score">0</span></p>
-			<p>Questions = <span id="qs">1 </span>/20</p>
-		</div>
 
-		
-  </div>
-		
-
-
-    <div id="scoreModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Your Score</h2>
-        <p id="scoreValue"></p>
-    </div>
-
-		<script src="app.js"></script>
-	</body>
+  <script src="app.js"></script>
+</body>
 </html>

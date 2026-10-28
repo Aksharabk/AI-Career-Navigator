@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume ATS Analyzer & Career Optimizer | AI-POWERED CAREER GUIDANCE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #667eea;
+      --primary-dark: #5a6fd8;
+      --secondary: #764ba2;
+      --accent: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --bg: #f4f6fb;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TOP NAVBAR */
+    .navbar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-btn-secondary {
+      background: #f1f5f9;
+      color: var(--text-main);
+    }
+    .nav-btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .nav-btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+    }
+    .nav-btn-primary:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    .user-pill {
+      background: #eff6ff;
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1050px;
+      margin: 30px auto;
+      padding: 0 20px;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* HEADER BANNER */
+    .header-banner {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      color: white;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.25);
+    }
+
+    .header-banner h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .header-banner p {
+      font-size: 14px;
+      opacity: 0.95;
+      margin-top: 6px;
+      max-width: 650px;
+      line-height: 1.5;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      color: white;
+    }
+
+    /* CARD COMPONENT */
+    .analyzer-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 35px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--border);
+      margin-bottom: 30px;
+    }
+
+    /* TABS */
+    .input-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 12px;
+    }
+
+    .tab-btn {
+      padding: 10px 20px;
+      border: none;
+      background: transparent;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: #eff6ff;
+      color: var(--primary);
+    }
+
+    /* UPLOAD DROPZONE */
+    .dropzone {
+      border: 2px dashed #cbd5e1;
+      border-radius: var(--radius-lg);
+      padding: 40px 25px;
+      text-align: center;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .dropzone:hover, .dropzone.dragover {
+      border-color: var(--primary);
+      background: #eff6ff;
+    }
+
+    .dropzone-icon {
+      font-size: 48px;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .dropzone h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .dropzone p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .file-input {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .selected-file-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      background: #ecfdf5;
+      border: 1.5px solid #a7f3d0;
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      margin-top: 15px;
+    }
+
+    .selected-file-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: #065f46;
+      font-size: 14px;
+    }
+
+    .remove-file-btn {
+      background: none;
+      border: none;
+      color: var(--danger);
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    /* TEXTAREA */
+    .paste-area {
+      display: none;
+    }
+
+    .custom-textarea {
+      width: 100%;
+      min-height: 200px;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border);
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--text-main);
+      background: #f8fafc;
+      resize: vertical;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .custom-textarea:focus {
+      border-color: var(--primary);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+    }
+
+    /* FORM GRID */
+    .config-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 25px 0;
+    }
+
+    @media (max-width: 768px) {
+      .config-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .custom-select, .custom-input {
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border);
+      font-size: 15px;
+      font-family: inherit;
+      background: #f8fafc;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .custom-select:focus, .custom-input:focus {
+      border-color: var(--primary);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+    }
+
+    /* SUBMIT BUTTON */
+    .scan-btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      font-size: 16px;
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+      transition: all 0.2s;
+    }
+
+    .scan-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(102, 126, 234, 0.4);
+    }
+
+    .scan-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* RESULTS DASHBOARD */
+    .results-container {
+      display: none;
+      animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .score-summary-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      border: 1px solid var(--border);
+      box-shadow: 0 15px 45px rgba(0,0,0,0.06);
+      margin-bottom: 25px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .score-summary-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+
+    .score-gauge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid #f1f5f9;
+      padding-right: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .score-gauge {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid #f1f5f9;
+        padding-bottom: 20px;
+      }
+    }
+
+    .score-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: conic-gradient(var(--accent) 0deg, #e2e8f0 0deg);
+      position: relative;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .score-circle-inner {
+      width: 112px;
+      height: 112px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-number {
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    .target-role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #eff6ff;
+      color: var(--primary);
+    }
+
+    /* BREAKDOWN PROGRESS BARS */
+    .breakdown-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .breakdown-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .breakdown-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .breakdown-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      color: #475569;
+    }
+
+    .progress-bar-bg {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .progress-bar-val {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      border-radius: 6px;
+      transition: width 0.6s ease;
+    }
+
+    /* SECTION CARDS */
+    .result-section-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+      margin-bottom: 25px;
+    }
+
+    .result-section-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-main);
+    }
+
+    /* KEYWORD PILLS */
+    .keywords-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .keyword-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .keyword-pill.missing {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    .keyword-pill.found {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    /* RECOMMENDATION LIST */
+    .rec-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rec-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border-radius: var(--radius-md);
+      border-left: 4px solid var(--primary);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .rec-item i {
+      color: var(--primary);
+      font-size: 16px;
+      margin-top: 2px;
+    }
+
+    /* SUMMARY REWRITE CARD */
+    .summary-box {
+      background: #fdf4ff;
+      border: 1.5px solid #f0abfc;
+      border-radius: var(--radius-md);
+      padding: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #4c1d95;
+      position: relative;
+      margin-top: 12px;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 6px 12px;
+      background: white;
+      border: 1px solid #d8b4fe;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #7e22ce;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: #faf5ff;
+    }
+
+    /* BULLET EXAMPLES */
+    .bullet-box {
+      background: #f8fafc;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+      border: 1px solid #e2e8f0;
+    }
+
+    .sync-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      background: #ecfdf5;
+      color: #065f46;
+      margin-bottom: 25px;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVIGATION -->
+  <nav class="navbar">
+    <a href="/dashboard" class="brand">
+      <div class="brand-icon">
+        <i class="fa-solid fa-graduation-cap"></i>
+      </div>
+      <span>AI CAREER & EMPLOYABILITY PLATFORM</span>
+    </a>
+
+    <div class="nav-actions">
+      <% if (isLoggedIn) { %>
+        <div class="user-pill">
+          <i class="fa-solid fa-user-check"></i>
+          <span><%= name %></span>
+        </div>
+        <a href="/profile" class="nav-btn nav-btn-secondary" title="View Profile">
+          <i class="fa-solid fa-id-card"></i> Profile
+        </a>
+      <% } else { %>
+        <a href="/" class="nav-btn nav-btn-secondary">
+          <i class="fa-solid fa-right-to-bracket"></i> Login
+        </a>
+      <% } %>
+      <a href="/dashboard" class="nav-btn nav-btn-primary">
+        <i class="fa-solid fa-house"></i> Dashboard
+      </a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- HEADER BANNER -->
+    <div class="header-banner">
+      <div>
+        <div class="badge-pill" style="margin-bottom: 10px;">
+          <i class="fa-solid fa-bullseye"></i> AI ATS Intelligence Engine
+        </div>
+        <h1>Resume ATS Analyzer & Career Optimizer</h1>
+        <p>
+          Upload your resume to calculate your exact ATS score, identify missing industry keywords, and receive tailored upgrade recommendations based on your dream career track.
+        </p>
+      </div>
+      <div>
+        <a href="/dashboard" class="badge-pill" style="text-decoration: none; cursor: pointer;">
+          <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+        </a>
+      </div>
+    </div>
+
+    <!-- MAIN UPLOAD / INPUT CARD -->
+    <div class="analyzer-card">
+      <form id="resumeForm">
+
+        <!-- INPUT TABS (FILE UPLOAD VS TEXT PASTE) -->
+        <div class="input-tabs">
+          <button type="button" class="tab-btn active" id="tabUpload" onclick="switchTab('upload')">
+            <i class="fa-solid fa-file-arrow-up"></i> Upload Resume File (PDF / DOCX / TXT)
+          </button>
+          <button type="button" class="tab-btn" id="tabPaste" onclick="switchTab('paste')">
+            <i class="fa-solid fa-paste"></i> Paste Resume Text
+          </button>
+        </div>
+
+        <!-- 1. FILE UPLOAD DROPZONE -->
+        <div id="uploadSection">
+          <div class="dropzone" id="dropzone">
+            <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
+            <h3>Drag & Drop your Resume here, or browse files</h3>
+            <p>Supports PDF, DOCX, and TXT (Max size: 10MB)</p>
+            <input type="file" id="resumeFileInput" name="resumeFile" class="file-input" accept=".pdf,.docx,.doc,.txt" onchange="handleFileSelected(this.files)">
+          </div>
+
+          <div id="selectedFileBanner" class="selected-file-banner">
+            <div class="selected-file-info">
+              <i class="fa-solid fa-file-pdf" style="font-size: 20px;"></i>
+              <span id="selectedFileName">resume.pdf</span>
+            </div>
+            <button type="button" class="remove-file-btn" onclick="clearSelectedFile()" title="Remove file">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. DIRECT PASTE SECTION -->
+        <div id="pasteSection" class="paste-area">
+          <textarea id="resumeTextInput" name="resumeText" class="custom-textarea" placeholder="Paste the complete text of your resume here (Summary, Work Experience, Technical Skills, Education)..."></textarea>
+        </div>
+
+        <!-- CAREER TRACK CONFIGURATION -->
+        <div class="config-grid">
+          <div class="form-group">
+            <label for="targetRoleSelect">
+              <i class="fa-solid fa-crosshairs" style="color: var(--primary);"></i> Target Career Track / Interest:
+            </label>
+            <select id="targetRoleSelect" name="targetRole" class="custom-select">
+              <% domainKeys.forEach(function(d) { %>
+                <option value="<%= d.key %>" <%= d.key === 'fullstack' ? 'selected' : '' %>>
+                  <%= d.title %>
+                </option>
+              <% }); %>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="jobDescInput">
+              <i class="fa-solid fa-briefcase" style="color: var(--primary);"></i> Target Job Description (Optional):
+            </label>
+            <input type="text" id="jobDescInput" name="jobDescription" class="custom-input" placeholder="Paste key job requirements or job title...">
+          </div>
+        </div>
+
+        <!-- SUBMIT BUTTON -->
+        <button type="submit" id="scanBtn" class="scan-btn">
+          <i class="fa-solid fa-magnifying-glass-chart"></i>
+          <span>Analyze Resume & Generate ATS Score</span>
+        </button>
+
+      </form>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- RESULTS DASHBOARD (DYNAMICALLY POPULATED) -->
+    <!-- ======================================================== -->
+    <div id="resultsContainer" class="results-container">
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+        <h2 style="font-size: 22px; font-weight: 800; color: var(--text-main);">
+          <i class="fa-solid fa-chart-pie" style="color: var(--primary); margin-right: 8px;"></i>ATS Analysis & Career Upgrade Report
+        </h2>
+        <div id="syncStatus" class="sync-status-pill">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Processed Successfully</span>
+        </div>
+      </div>
+
+      <!-- OVERALL SCORE SUMMARY -->
+      <div class="score-summary-card">
+        <div class="score-gauge">
+          <div class="score-circle" id="scoreCircle">
+            <div class="score-circle-inner">
+              <span class="score-number" id="atsScoreValue">0</span>
+              <span class="score-label">ATS SCORE</span>
+            </div>
+          </div>
+          <span class="target-role-badge" id="resultTargetRole">Full Stack Developer</span>
+        </div>
+
+        <div>
+          <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 6px;" id="scoreHeading">Good ATS Foundation</h3>
+          <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px;" id="scoreSubheading">
+            Your resume was evaluated against ATS screening filters, domain keywords, and industry hiring benchmarks.
+          </p>
+
+          <!-- 4 BREAKDOWN PROGRESS BARS -->
+          <div class="breakdown-grid">
+            <div class="breakdown-item">
+              <div class="breakdown-header">
+                <span>Keyword Relevance</span>
+                <span id="kwScoreText">0%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-val" id="kwScoreBar"></div>
+              </div>
+            </div>
+
+            <div class="breakdown-item">
+              <div class="breakdown-header">
+                <span>Section Completeness</span>
+                <span id="secScoreText">0%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-val" id="secScoreBar"></div>
+              </div>
+            </div>
+
+            <div class="breakdown-item">
+              <div class="breakdown-header">
+                <span>Measurable Impact</span>
+                <span id="impScoreText">0%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-val" id="impScoreBar"></div>
+              </div>
+            </div>
+
+            <div class="breakdown-item">
+              <div class="breakdown-header">
+                <span>Formatting & Density</span>
+                <span id="fmtScoreText">0%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-val" id="fmtScoreBar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MISSING KEYWORDS (CRITICAL) -->
+      <div class="result-section-card" style="border-left: 5px solid var(--danger);">
+        <h3>
+          <i class="fa-solid fa-triangle-exclamation" style="color: var(--danger);"></i>
+          Missing Domain Keywords
+        </h3>
+        <p style="font-size: 14px; color: var(--text-muted);">
+          Recruiter search algorithms and ATS parsers scan for these exact keywords. Adding these to your Experience, Projects, or Skills sections will directly increase your interview callback rate.
+        </p>
+        <div id="missingKeywordsWrap" class="keywords-wrap"></div>
+      </div>
+
+      <!-- FOUND KEYWORDS -->
+      <div class="result-section-card" style="border-left: 5px solid var(--accent);">
+        <h3>
+          <i class="fa-solid fa-circle-check" style="color: var(--accent);"></i>
+          Detected & Matched Competencies
+        </h3>
+        <p style="font-size: 14px; color: var(--text-muted);">
+          These high-value skills and tools were successfully identified in your resume:
+        </p>
+        <div id="foundKeywordsWrap" class="keywords-wrap"></div>
+      </div>
+
+      <!-- TAILORED PROFESSIONAL SUMMARY UPGRADE -->
+      <div class="result-section-card">
+        <h3>
+          <i class="fa-solid fa-wand-magic-sparkles" style="color: #9333ea;"></i>
+          Recommended Professional Summary Upgrade
+        </h3>
+        <p style="font-size: 14px; color: var(--text-muted);">
+          Here is an ATS-optimized summary crafted for your chosen career interest, seamlessly weaving in power action verbs and domain skills:
+        </p>
+        <div class="summary-box">
+          <button type="button" class="copy-btn" onclick="copySuggestedSummary()">
+            <i class="fa-solid fa-copy"></i> <span id="copySummaryBtnText">Copy</span>
+          </button>
+          <span id="suggestedSummaryText">Loading recommendation...</span>
+        </div>
+      </div>
+
+      <!-- ACTION BULLETS (GOOGLE X-Y-Z FORMULA) -->
+      <div class="result-section-card">
+        <h3>
+          <i class="fa-solid fa-chart-line" style="color: var(--primary);"></i>
+          Recommended Bullet Points (Google X-Y-Z Formula)
+        </h3>
+        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 15px;">
+          Upgrade weak bullet points into metric-driven statements: <em>"Accomplished [X], as measured by [Y], by doing [Z]"</em>:
+        </p>
+        <div id="sampleBulletsWrap"></div>
+      </div>
+
+      <!-- RECOMMENDED ROADMAP & CERTIFICATIONS -->
+      <div class="result-section-card">
+        <h3>
+          <i class="fa-solid fa-certificate" style="color: var(--warning);"></i>
+          Recommended Certifications to Boost Employability
+        </h3>
+        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">
+          Industry-recognized credentials that top recruiters look for in this domain:
+        </p>
+        <div id="certificationsWrap" class="keywords-wrap"></div>
+      </div>
+
+      <!-- ACTIONABLE RECOMMENDATIONS LIST -->
+      <div class="result-section-card">
+        <h3>
+          <i class="fa-solid fa-list-check" style="color: var(--primary);"></i>
+          Prioritized Action Items for Your Resume
+        </h3>
+        <ul id="recommendationsList" class="rec-list"></ul>
+      </div>
+
+      <!-- FOOTER ACTIONS -->
+      <div style="display: flex; justify-content: center; gap: 15px; margin-top: 25px; flex-wrap: wrap;">
+        <button type="button" class="nav-btn nav-btn-primary" onclick="scrollToTop()">
+          <i class="fa-solid fa-rotate-left"></i> Analyze Another Resume
+        </button>
+        <% if (isLoggedIn) { %>
+          <a href="/profile" class="nav-btn nav-btn-secondary">
+            <i class="fa-solid fa-id-card"></i> View Profile History
+          </a>
+        <% } %>
+        <a href="/dashboard" class="nav-btn nav-btn-secondary">
+          <i class="fa-solid fa-house"></i> Go to Dashboard
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    let activeTab = 'upload';
+    let currentSuggestedSummary = '';
+
+    function switchTab(tab) {
+      activeTab = tab;
+      const tabUpload = document.getElementById('tabUpload');
+      const tabPaste = document.getElementById('tabPaste');
+      const uploadSection = document.getElementById('uploadSection');
+      const pasteSection = document.getElementById('pasteSection');
+
+      if (tab === 'upload') {
+        tabUpload.classList.add('active');
+        tabPaste.classList.remove('active');
+        uploadSection.style.display = 'block';
+        pasteSection.style.display = 'none';
+      } else {
+        tabPaste.classList.add('active');
+        tabUpload.classList.remove('active');
+        uploadSection.style.display = 'none';
+        pasteSection.style.display = 'block';
+      }
+    }
+
+    function handleFileSelected(files) {
+      if (files && files.length > 0) {
+        const file = files[0];
+        document.getElementById('selectedFileName').textContent = file.name;
+        document.getElementById('selectedFileBanner').style.display = 'flex';
+      }
+    }
+
+    function clearSelectedFile() {
+      document.getElementById('resumeFileInput').value = '';
+      document.getElementById('selectedFileBanner').style.display = 'none';
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function copySuggestedSummary() {
+      if (!currentSuggestedSummary) return;
+      navigator.clipboard.writeText(currentSuggestedSummary).then(() => {
+        const btnText = document.getElementById('copySummaryBtnText');
+        btnText.textContent = 'Copied!';
+        setTimeout(() => { btnText.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    // Drag and drop event listeners
+    const dropzone = document.getElementById('dropzone');
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropzone.addEventListener(eventName, e => {
+        e.preventDefault();
+        dropzone.classList.add('dragover');
+      });
+    });
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropzone.addEventListener(eventName, e => {
+        e.preventDefault();
+        dropzone.classList.remove('dragover');
+      });
+    });
+    dropzone.addEventListener('drop', e => {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      if (files && files.length > 0) {
+        document.getElementById('resumeFileInput').files = files;
+        handleFileSelected(files);
+      }
+    });
+
+    // Form Submission
+    document.getElementById('resumeForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const scanBtn = document.getElementById('scanBtn');
+      const fileInput = document.getElementById('resumeFileInput');
+      const textInput = document.getElementById('resumeTextInput');
+      const targetRoleSelect = document.getElementById('targetRoleSelect');
+      const jobDescInput = document.getElementById('jobDescInput');
+
+      const formData = new FormData();
+      formData.append('targetRole', targetRoleSelect.value);
+      formData.append('jobDescription', jobDescInput.value);
+
+      if (activeTab === 'upload') {
+        if (!fileInput.files || fileInput.files.length === 0) {
+          alert('Please choose or drag a resume file (PDF, DOCX, TXT) to upload!');
+          return;
+        }
+        formData.append('resumeFile', fileInput.files[0]);
+      } else {
+        if (!textInput.value || textInput.value.trim().length < 30) {
+          alert('Please paste at least a few lines of resume text!');
+          return;
+        }
+        formData.append('resumeText', textInput.value.trim());
+      }
+
+      scanBtn.disabled = true;
+      scanBtn.innerHTML = `<span class="spinner"></span> <span>Analyzing ATS Compatibility & Extracting Keywords...</span>`;
+
+      try {
+        const response = await fetch('/api/resume/analyze', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || 'Analysis failed');
+        }
+
+        renderResults(data);
+      } catch (err) {
+        console.error('Resume Scan Error:', err);
+        alert('Error: ' + err.message);
+      } finally {
+        scanBtn.disabled = false;
+        scanBtn.innerHTML = `<i class="fa-solid fa-magnifying-glass-chart"></i> <span>Analyze Resume & Generate ATS Score</span>`;
+      }
+    });
+
+    function renderResults(data) {
+      const res = data.analysis;
+      const container = document.getElementById('resultsContainer');
+
+      // 1. Overall Score
+      const score = res.atsScore;
+      document.getElementById('atsScoreValue').textContent = score;
+      document.getElementById('resultTargetRole').textContent = res.targetRole;
+
+      // Color coding score
+      const circle = document.getElementById('scoreCircle');
+      let scoreColor = '#ef4444';
+      let heading = 'Needs ATS Optimization';
+      let subheading = 'Your resume is missing critical domain keywords and structural elements required by ATS filters.';
+
+      if (score >= 75) {
+        scoreColor = '#10b981';
+        heading = 'Strong ATS Compatibility! 🚀';
+        subheading = 'Your resume demonstrates high keyword density and structure aligned with recruiter screening criteria.';
+      } else if (score >= 50) {
+        scoreColor = '#f59e0b';
+        heading = 'Moderate ATS Match ⚡';
+        subheading = 'Good baseline structure, but adding missing domain keywords and quantifiable metrics will greatly elevate your ranking.';
+      }
+
+      circle.style.background = `conic-gradient(${scoreColor} ${score * 3.6}deg, #e2e8f0 0deg)`;
+      document.getElementById('scoreHeading').textContent = heading;
+      document.getElementById('scoreSubheading').textContent = subheading;
+
+      // 2. Breakdown Progress Bars
+      document.getElementById('kwScoreText').textContent = res.breakdown.keywordScore + '%';
+      document.getElementById('kwScoreBar').style.width = res.breakdown.keywordScore + '%';
+
+      document.getElementById('secScoreText').textContent = res.breakdown.sectionScore + '%';
+      document.getElementById('secScoreBar').style.width = res.breakdown.sectionScore + '%';
+
+      document.getElementById('impScoreText').textContent = res.breakdown.impactScore + '%';
+      document.getElementById('impScoreBar').style.width = res.breakdown.impactScore + '%';
+
+      document.getElementById('fmtScoreText').textContent = res.breakdown.formattingScore + '%';
+      document.getElementById('fmtScoreBar').style.width = res.breakdown.formattingScore + '%';
+
+      // 3. Missing Keywords
+      const missingWrap = document.getElementById('missingKeywordsWrap');
+      missingWrap.innerHTML = '';
+      if (res.missingKeywords && res.missingKeywords.length > 0) {
+        res.missingKeywords.forEach(kw => {
+          const pill = document.createElement('span');
+          pill.className = 'keyword-pill missing';
+          pill.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> ${kw}`;
+          missingWrap.appendChild(pill);
+        });
+      } else {
+        missingWrap.innerHTML = '<span style="color: #065f46; font-size: 14px; font-weight: 700;"><i class="fa-solid fa-circle-check"></i> Great job! No critical keywords missing for this role.</span>';
+      }
+
+      // 4. Found Keywords
+      const foundWrap = document.getElementById('foundKeywordsWrap');
+      foundWrap.innerHTML = '';
+      if (res.foundKeywords && res.foundKeywords.length > 0) {
+        res.foundKeywords.forEach(kw => {
+          const pill = document.createElement('span');
+          pill.className = 'keyword-pill found';
+          pill.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${kw}`;
+          foundWrap.appendChild(pill);
+        });
+      } else {
+        foundWrap.innerHTML = '<span style="color: #64748b; font-size: 14px;">No standard technical keywords identified yet.</span>';
+      }
+
+      // 5. Suggested Professional Summary
+      currentSuggestedSummary = res.suggestedSummary;
+      document.getElementById('suggestedSummaryText').textContent = res.suggestedSummary;
+
+      // 6. Sample Bullets
+      const bulletsWrap = document.getElementById('sampleBulletsWrap');
+      bulletsWrap.innerHTML = '';
+      if (res.sampleBullets && res.sampleBullets.length > 0) {
+        res.sampleBullets.forEach(b => {
+          const div = document.createElement('div');
+          div.className = 'bullet-box';
+          div.innerHTML = `<i class="fa-solid fa-angle-right" style="color: var(--primary); margin-right: 6px;"></i> ${b}`;
+          bulletsWrap.appendChild(div);
+        });
+      }
+
+      // 7. Certifications
+      const certsWrap = document.getElementById('certificationsWrap');
+      certsWrap.innerHTML = '';
+      if (res.recommendedCertifications && res.recommendedCertifications.length > 0) {
+        res.recommendedCertifications.forEach(c => {
+          const pill = document.createElement('span');
+          pill.className = 'keyword-pill';
+          pill.style.background = '#fef3c7';
+          pill.style.color = '#92400e';
+          pill.style.border = '1px solid #fde68a';
+          pill.innerHTML = `<i class="fa-solid fa-award"></i> ${c}`;
+          certsWrap.appendChild(pill);
+        });
+      }
+
+      // 8. Actionable Recommendations
+      const recList = document.getElementById('recommendationsList');
+      recList.innerHTML = '';
+      if (res.recommendations && res.recommendations.length > 0) {
+        res.recommendations.forEach(r => {
+          const li = document.createElement('li');
+          li.className = 'rec-item';
+          li.innerHTML = `<i class="fa-solid fa-circle-arrow-right"></i> <span>${r}</span>`;
+          recList.appendChild(li);
+        });
+      }
+
+      // 9. Sync Status Banner
+      const syncStatus = document.getElementById('syncStatus');
+      if (data.savedToProfile) {
+        syncStatus.className = 'sync-status-pill';
+        syncStatus.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>Scan & Recommendations Saved to Your Profile</span>`;
+      } else {
+        syncStatus.className = 'sync-status-pill';
+        syncStatus.style.background = '#eff6ff';
+        syncStatus.style.color = '#1d4ed8';
+        syncStatus.innerHTML = `<i class="fa-solid fa-info-circle"></i> <span>Guest Scan (Log in to save history)</span>`;
+      }
+
+      container.style.display = 'block';
+      container.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
