@@ -121,6 +121,28 @@
         padding: 20px;
       }
     }
+
+    .quiz-percentage {
+      font-size: 13px;
+      font-weight: normal;
+    }
+
+    .ats-score {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .good {
+      color: #10b981;
+    }
+
+    .average {
+      color: #f59e0b;
+    }
+
+    .poor {
+      color: #ef4444;
+    }
   </style>
 </head>
 
@@ -212,7 +234,7 @@
               <div style="font-size: 20px; font-weight: bold; color: #222;">
                 <%= quiz.score %> / <%= quiz.total %>
                     <span
-                      style="font-size: 13px; font-weight: normal; color: <%= quiz.percentage >= 70 ? '#10b981' : quiz.percentage >= 40 ? '#f59e0b' : '#ef4444' %>;">
+                      class="quiz-percentage <%= quiz.percentage >= 70 ? 'good' : quiz.percentage >= 40 ? 'average' : 'poor' %>">
                       (<%= quiz.percentage %>%)
                     </span>
               </div>
@@ -249,8 +271,7 @@
                 <span style="font-size: 13px; color: #667eea; font-weight: 800;">
                   <%= scan.targetRole %>
                 </span>
-                <span
-                  style="font-size: 15px; font-weight: 800; color: <%= scan.atsScore >= 75 ? '#10b981' : scan.atsScore >= 50 ? '#f59e0b' : '#ef4444' %>;">
+                <span class="ats-score <%= scan.atsScore >= 75 ? 'good' : scan.atsScore >= 50 ? 'average' : 'poor' %>">
                   <%= scan.atsScore %>/100
                 </span>
               </div>
