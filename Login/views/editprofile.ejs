@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Edit Profile</title>
+  <title>Edit Profile | AI-POWERED CAREER GUIDANCE AND EMPLOYABILITY ENHANCEMENT PLATFORM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
     body {
@@ -28,16 +29,20 @@
     h2 {
       text-align: center;
       margin-bottom: 20px;
+      color: #333;
     }
 
     label {
       font-size: 14px;
       display: block;
       margin-top: 15px;
+      color: #444;
+      font-weight: 600;
     }
 
     input, select {
       width: 100%;
+      box-sizing: border-box;
       padding: 10px;
       margin-top: 6px;
       border-radius: 6px;
@@ -54,6 +59,8 @@
       border-radius: 8px;
       font-size: 15px;
       cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
     }
 
     button:hover {
@@ -64,7 +71,7 @@
 <body>
 
 <div class="edit-card">
-  <h2>Edit Profile</h2>
+  <h2><i class="fa-solid fa-user-pen" style="color: #667eea; margin-right: 8px;"></i>Edit Profile</h2>
 
   <form action="/edit-profile" method="POST">
 
@@ -85,7 +92,8 @@
     <label>Education</label>
     <input type="text" name="education" value="<%= user.education || '' %>">
 
-    <button type="submit">Save Changes</button>
+    <button type="submit"><i class="fa-solid fa-floppy-disk" style="margin-right: 6px;"></i>Save Changes</button>
+    <a href="/profile" style="display: block; text-align: center; margin-top: 15px; text-decoration: none; color: #667eea; font-weight: 600; font-size: 14px;"><i class="fa-solid fa-arrow-left" style="margin-right: 6px;"></i>Back to Profile</a>
   </form>
 </div>
 

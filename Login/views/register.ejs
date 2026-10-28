@@ -2,72 +2,145 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AI-POWERED CAREER GUIDANCE AND EMPLOYABILITY ENHANCEMENT PLATFORM | Login</title>
+  <title>Login & Registration | AI-POWERED CAREER GUIDANCE AND EMPLOYABILITY ENHANCEMENT PLATFORM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
       background: linear-gradient(135deg, #667eea, #764ba2);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 20px;
     }
 
     .auth-container {
-      background: #fff;
-      width: 900px;
-      max-width: 95%;
-      border-radius: 18px;
+      background: #ffffff;
+      width: 950px;
+      max-width: 100%;
+      border-radius: 20px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1.15fr;
       overflow: hidden;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
     }
 
     /* LEFT PANEL */
     .auth-left {
       background: linear-gradient(135deg, #667eea, #764ba2);
       color: white;
-      padding: 50px 35px;
+      padding: 50px 40px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      position: relative;
+    }
+
+    .auth-left-brand {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .auth-left h1 {
-      font-size: 32px;
-      margin-bottom: 15px;
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.35;
+      margin: 0 0 16px 0;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+    }
+
+    .auth-left h2 {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+      opacity: 0.95;
+      margin: 0 0 22px 0;
+      color: #ffd6ff;
     }
 
     .auth-left p {
-      font-size: 15px;
-      line-height: 1.6;
+      font-size: 14px;
+      line-height: 1.7;
+      opacity: 0.92;
+      margin: 0 0 25px 0;
+    }
+
+    .auth-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .auth-features li {
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       opacity: 0.95;
+    }
+
+    .auth-features li i {
+      color: #ffd166;
+      font-size: 14px;
+      width: 18px;
+      text-align: center;
     }
 
     /* RIGHT PANEL */
     .auth-right {
       padding: 45px 40px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .tabs {
       display: flex;
       margin-bottom: 25px;
+      border-bottom: 2px solid #eef2f7;
     }
 
     .tab {
       flex: 1;
       text-align: center;
-      padding: 12px;
+      padding: 12px 16px;
       cursor: pointer;
-      font-weight: 600;
-      color: #777;
+      font-weight: 700;
+      font-size: 15px;
+      color: #64748b;
       border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .tab:hover {
+      color: #667eea;
     }
 
     .tab.active {
@@ -77,56 +150,130 @@
 
     form {
       display: none;
-      animation: fadeIn 0.5s ease;
+      animation: fadeIn 0.3s ease;
     }
 
     form.active {
       display: block;
     }
 
-    .input-group {
+    .alert-danger {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+      padding: 11px 14px;
+      border-radius: 10px;
+      font-size: 13px;
       margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.4;
+    }
+
+    .alert-success {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      padding: 11px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.4;
+    }
+
+    .input-group {
+      margin-bottom: 16px;
     }
 
     .input-group label {
       font-size: 13px;
-      color: #555;
+      font-weight: 600;
+      color: #334155;
       display: block;
       margin-bottom: 6px;
     }
 
-    .input-group input {
-      width: 100%;
-      padding: 11px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      left: 14px;
+      color: #94a3b8;
       font-size: 14px;
+      pointer-events: none;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      padding: 11px 14px 11px 38px;
+      border-radius: 10px;
+      border: 1.5px solid #cbd5e1;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s ease;
+      color: #1e293b;
+    }
+
+    .input-wrapper input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
     }
 
     .btn {
       width: 100%;
-      padding: 12px;
-      background: #667eea;
+      padding: 13px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
       color: white;
       border: none;
       border-radius: 10px;
       font-size: 15px;
+      font-weight: 700;
       cursor: pointer;
       margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: opacity 0.2s, transform 0.1s;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
     }
 
     .btn:hover {
-      background: #5a6fd8;
+      opacity: 0.95;
+      transform: translateY(-1px);
     }
 
-    .error {
-      color: red;
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .auth-helper {
+      text-align: center;
+      margin-top: 18px;
       font-size: 13px;
-      margin-bottom: 10px;
+      color: #64748b;
+    }
+
+    .auth-helper a {
+      color: #667eea;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .auth-helper a:hover {
+      text-decoration: underline;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -138,6 +285,10 @@
       .auth-left {
         display: none;
       }
+
+      .auth-right {
+        padding: 30px 24px;
+      }
     }
   </style>
 </head>
@@ -147,39 +298,25 @@
 
   <!-- LEFT INFO PANEL -->
   <div class="auth-left">
-	<h1 style="
-	font-size: 26px;
-	font-weight: 800;
-	line-height: 1.3;
-	margin-bottom: 14px;
-	letter-spacing: 0.3px;
-	text-transform: uppercase;
-  ">
-	AI-POWERED CAREER GUIDANCE AND EMPLOYABILITY ENHANCEMENT PLATFORM
-  </h1>
-  
-  <h2 style="
-	font-size: 15px;
-	font-weight: 600;
-	letter-spacing: 1.2px;
-	text-transform: uppercase;
-	opacity: 0.95;
-	margin-bottom: 25px;
-	color: #ffd6ff;
-  ">
-	Personalized Career & Employability Engine
-  </h2>
-  
-  <p style="
-	font-size: 15px;
-	line-height: 1.7;
-	opacity: 0.9;
-	max-width: 90%;
-  ">
-	Discover your ideal career path using AI-powered insights,
-	aptitude analysis, and intelligent personalized guidance.
-  </p>
-  
+    <div class="auth-left-brand">
+      <i class="fa-solid fa-graduation-cap"></i> AI CAREER SUITE
+    </div>
+
+    <h1>AI-POWERED CAREER GUIDANCE AND EMPLOYABILITY ENHANCEMENT PLATFORM</h1>
+    
+    <h2>Personalized Career & Employability Engine</h2>
+    
+    <p>
+      Discover your ideal career path using AI-powered insights,
+      aptitude analysis, resume ATS scoring, and intelligent skill benchmarks.
+    </p>
+
+    <ul class="auth-features">
+      <li><i class="fa-solid fa-file-circle-check"></i> AI Resume ATS Scoring & Keyword Analysis</li>
+      <li><i class="fa-solid fa-compass"></i> Personalized Machine-Learned Career Roadmaps</li>
+      <li><i class="fa-solid fa-brain"></i> Dynamic Aptitude & IQ Competency Testing</li>
+      <li><i class="fa-solid fa-chart-line"></i> Employability Metrics & Skill Benchmarking</li>
+    </ul>
   </div>
 
   <!-- RIGHT FORM PANEL -->
@@ -187,63 +324,124 @@
 
     <!-- TABS -->
     <div class="tabs">
-      <div class="tab active" onclick="showForm('login')">Login</div>
-      <div class="tab" onclick="showForm('register')">Register</div>
+      <div id="loginTab" class="tab <%= (typeof activeTab !== 'undefined' && activeTab === 'register') ? '' : 'active' %>" onclick="showForm('login')">
+        <i class="fa-solid fa-right-to-bracket"></i> Login
+      </div>
+      <div id="registerTab" class="tab <%= (typeof activeTab !== 'undefined' && activeTab === 'register') ? 'active' : '' %>" onclick="showForm('register')">
+        <i class="fa-solid fa-user-plus"></i> Register
+      </div>
     </div>
 
-    <!-- LOGIN FORM -->
-    <form action="/login" method="POST" id="login" class="active">
+    <!-- GLOBAL SUCCESS BANNER -->
+    <% if (typeof successMessage !== 'undefined' && successMessage) { %>
+      <div class="alert-success">
+        <i class="fa-solid fa-circle-check"></i>
+        <span><%= successMessage %></span>
+      </div>
+    <% } %>
 
-      <% if (email) { %>
-        <div class="error"><%= email %></div>
+    <!-- LOGIN FORM -->
+    <form action="/login" method="POST" id="login" class="<%= (typeof activeTab !== 'undefined' && activeTab === 'register') ? '' : 'active' %>">
+
+      <% if (typeof loginError !== 'undefined' && loginError) { %>
+        <div class="alert-danger">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span><%= loginError %></span>
+        </div>
+      <% } else if (typeof email !== 'undefined' && email && (typeof activeTab === 'undefined' || activeTab !== 'register')) { %>
+        <div class="alert-danger">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span><%= email %></span>
+        </div>
       <% } %>
 
       <div class="input-group">
-        <label>Email</label>
-        <input type="email" name="email" required>
+        <label for="loginEmail">Email Address</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-envelope"></i>
+          <input type="email" id="loginEmail" name="email" value="<%= typeof loginEmail !== 'undefined' ? loginEmail : '' %>" placeholder="Enter your email" required autocomplete="email">
+        </div>
       </div>
 
       <div class="input-group">
-        <label>Password</label>
-        <input type="password" name="password" required>
+        <label for="loginPassword">Password</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required autocomplete="current-password">
+        </div>
       </div>
 
-      <button class="btn">Login</button>
+      <button class="btn" type="submit">
+        <i class="fa-solid fa-right-to-bracket"></i> Login to Dashboard
+      </button>
+
+      <div class="auth-helper">
+        Don't have an account yet? <a href="javascript:void(0)" onclick="showForm('register')">Create one here</a>
+      </div>
     </form>
 
     <!-- REGISTER FORM -->
-    <form action="/register" method="POST" id="register">
+    <form action="/register" method="POST" id="register" class="<%= (typeof activeTab !== 'undefined' && activeTab === 'register') ? 'active' : '' %>">
 
-      <% if (password) { %>
-        <div class="error"><%= password %></div>
+      <% if (typeof registerError !== 'undefined' && registerError) { %>
+        <div class="alert-danger">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span><%= registerError %></span>
+        </div>
+      <% } else if (typeof password !== 'undefined' && password) { %>
+        <div class="alert-danger">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span><%= password %></span>
+        </div>
       <% } %>
 
       <div class="input-group">
-        <label>Full Name</label>
-        <input type="text" name="name" required>
+        <label for="registerName">Full Name</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" id="registerName" name="name" value="<%= typeof registerName !== 'undefined' ? registerName : '' %>" placeholder="e.g. John Doe" required autocomplete="name">
+        </div>
       </div>
 
       <div class="input-group">
-        <label>Phone</label>
-        <input type="text" name="phone">
+        <label for="registerPhone">Phone Number</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-phone"></i>
+          <input type="text" id="registerPhone" name="phone" value="<%= typeof registerPhone !== 'undefined' ? registerPhone : '' %>" placeholder="e.g. +1 555-0199" autocomplete="tel">
+        </div>
       </div>
 
       <div class="input-group">
-        <label>Email</label>
-        <input type="email" name="email" required>
+        <label for="registerEmail">Email Address</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-envelope"></i>
+          <input type="email" id="registerEmail" name="email" value="<%= typeof registerEmail !== 'undefined' ? registerEmail : '' %>" placeholder="name@example.com" required autocomplete="email">
+        </div>
       </div>
 
       <div class="input-group">
-        <label>Password</label>
-        <input type="password" name="password" required>
+        <label for="registerPassword">Password</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" id="registerPassword" name="password" placeholder="At least 4 characters" required autocomplete="new-password">
+        </div>
       </div>
 
       <div class="input-group">
-        <label>Confirm Password</label>
-        <input type="password" name="cpassword" required>
+        <label for="registerCPassword">Confirm Password</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-shield-halved"></i>
+          <input type="password" id="registerCPassword" name="cpassword" placeholder="Re-enter your password" required autocomplete="new-password">
+        </div>
       </div>
 
-      <button class="btn">Create Account</button>
+      <button class="btn" type="submit">
+        <i class="fa-solid fa-user-plus"></i> Create Account
+      </button>
+
+      <div class="auth-helper">
+        Already have an account? <a href="javascript:void(0)" onclick="showForm('login')">Sign in here</a>
+      </div>
     </form>
 
   </div>
@@ -254,8 +452,10 @@
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('form').forEach(f => f.classList.remove('active'));
 
-    document.getElementById(type).classList.add('active');
-    event.target.classList.add('active');
+    const targetForm = document.getElementById(type);
+    const targetTab = document.getElementById(type + 'Tab');
+    if (targetForm) targetForm.classList.add('active');
+    if (targetTab) targetTab.classList.add('active');
   }
 </script>
 

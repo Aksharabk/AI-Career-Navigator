@@ -89,8 +89,17 @@ app.use("/", homeRouter);
 app.get("/dashboard", async (req, res) => {
   if (!req.session.userId) return res.redirect("/");
 
-  const user = await User.findById(req.session.userId).lean();
-  res.render("dashboard", { name: user.name });
+  try {
+    const user = await User.findById(req.session.userId).lean();
+    if (!user) {
+      req.session.destroy();
+      return res.redirect("/");
+    }
+    res.render("dashboard", { name: user.name });
+  } catch (err) {
+    console.error("Dashboard error:", err);
+    res.redirect("/");
+  }
 });
 
 // ============================
@@ -99,8 +108,17 @@ app.get("/dashboard", async (req, res) => {
 app.get("/profile", async (req, res) => {
   if (!req.session.userId) return res.redirect("/");
 
-  const user = await User.findById(req.session.userId).lean();
-  res.render("profile", { user });
+  try {
+    const user = await User.findById(req.session.userId).lean();
+    if (!user) {
+      req.session.destroy();
+      return res.redirect("/");
+    }
+    res.render("profile", { user });
+  } catch (err) {
+    console.error("Profile error:", err);
+    res.redirect("/");
+  }
 });
 
 // ============================
