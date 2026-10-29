@@ -22,6 +22,8 @@ services:
     envVars:
       - key: MONGO_URI
         value: mongodb+srv://maheethasakthivel22_db_user:WCW4wEK7FaD8sIXU@cluster0.fotjdst.mongodb.net/ai_career?retryWrites=true&w=majority
+      - key: GEMINI_API_KEY
+        sync: false
       - key: RECOMMENDATION_URL
         fromService:
           type: web

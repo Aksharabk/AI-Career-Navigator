@@ -151,6 +151,77 @@ app.get("/chat", (req, res) => {
 });
 
 // ============================
+// GEMINI AI CHAT ENDPOINT
+// ============================
+app.post("/api/chat", async (req, res) => {
+  try {
+    const userMessage = (req.body.message || "").trim();
+    if (!userMessage) {
+      return res.status(400).json({ error: "Message cannot be empty." });
+    }
+
+    const apiKey = (process.env.GEMINI_API_KEY || "").trim();
+
+    // If no Gemini key is provided, signal frontend to use local fallback
+    if (!apiKey || apiKey === "YOUR_GEMINI_API_KEY_HERE") {
+      return res.json({
+        success: false,
+        source: "fallback",
+        message: "No Gemini API key configured."
+      });
+    }
+
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+    const prompt = `You are an expert AI Career Navigator and Employability Counselor.
+Provide concise, highly actionable, encouraging, and structured advice for the following student or job-seeker inquiry.
+Format with clean bullet points or short paragraphs. Keep your response within 80-120 words unless deeper explanation is asked.
+Question: "${userMessage}"`;
+
+    const response = await fetch(geminiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [
+          {
+            parts: [{ text: prompt }]
+          }
+        ],
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 350
+        }
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+      const replyText = data.candidates[0].content.parts.map((p) => p.text).join("");
+      return res.json({
+        success: true,
+        source: "gemini",
+        reply: replyText
+      });
+    } else {
+      console.warn("Gemini response did not contain candidates:", data);
+      return res.json({
+        success: false,
+        source: "fallback",
+        error: data.error ? data.error.message : "Unable to generate AI content"
+      });
+    }
+  } catch (error) {
+    console.error("Gemini API Error:", error.message);
+    return res.status(500).json({
+      success: false,
+      source: "fallback",
+      error: error.message
+    });
+  }
+});
+
+// ============================
 // TEST PAGE
 // ============================
 app.get("/take-test", (req, res) => {

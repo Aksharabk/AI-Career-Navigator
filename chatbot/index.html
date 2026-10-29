@@ -123,18 +123,23 @@ body{
 
 <div class="chat-wrapper">
 
-<div class="header">
-  <div class="icon"><i class="fa-solid fa-robot"></i></div>
-  <div>
-    <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.3px;">AI-POWERED CAREER GUIDANCE AND EMPLOYABILITY ENHANCEMENT PLATFORM</h3>
-    <span>Career & Employability Assistant</span>
+<div class="header" style="justify-content: space-between;">
+  <div style="display: flex; align-items: center; gap: 12px;">
+    <div class="icon"><i class="fa-solid fa-robot"></i></div>
+    <div>
+      <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.3px;">AI-POWERED CAREER GUIDANCE AND EMPLOYABILITY ENHANCEMENT PLATFORM</h3>
+      <span>Gemini AI Career & Employability Assistant</span>
+    </div>
   </div>
+  <a href="/dashboard" style="color: white; text-decoration: none; font-size: 18px; padding: 6px;" title="Back to Dashboard">
+    <i class="fa-solid fa-house"></i>
+  </a>
 </div>
 
 <div class="chat-area" id="chat">
   <div class="msg bot">
-    👋 Hi! I’m the <b>AI-Powered Career Guidance and Employability Enhancement Assistant</b>.<br><br>
-    I can guide you on:
+    Hi! I’m your <b>AI-Powered Career & Employability Navigator</b> powered by Google Gemini.<br><br>
+    Ask me anything about career roadmaps, technical skills, resume advice, placements, or higher studies!
   </div>
   <div class="quick">
     <span onclick="quickAsk('career options')">Career Options</span>
@@ -146,67 +151,119 @@ body{
 </div>
 
 <div class="input">
-  <input id="userInput" placeholder="Ask your career doubt..." />
+  <input id="userInput" placeholder="Ask your career doubt..." autocomplete="off" />
   <button onclick="send()"><i class="fa-solid fa-paper-plane"></i></button>
 </div>
 
 </div>
 
 <script>
-const chat=document.getElementById("chat");
+const chat = document.getElementById("chat");
 
-function addMsg(text,cls){
-  const d=document.createElement("div");
-  d.className="msg "+cls;
-  d.innerHTML=text;
+function addMsg(text, cls){
+  const d = document.createElement("div");
+  d.className = "msg " + cls;
+  d.innerHTML = text;
   chat.appendChild(d);
-  chat.scrollTop=chat.scrollHeight;
+  chat.scrollTop = chat.scrollHeight;
+  return d;
 }
 
-function send(){
-  const input=document.getElementById("userInput");
-  const msg=input.value.trim();
+async function send(){
+  const input = document.getElementById("userInput");
+  const msg = input.value.trim();
   if(!msg) return;
-  addMsg(msg,"user");
-  input.value="";
-  setTimeout(()=>addMsg(brain(msg),"bot"),500);
+
+  addMsg(msg, "user");
+  input.value = "";
+
+  // Show typing loader
+  const typingEl = addMsg('<i class="fa-solid fa-circle-notch fa-spin" style="margin-right: 6px; color: #667eea;"></i> Gemini AI is thinking...', "bot");
+
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: msg })
+    });
+    const data = await res.json();
+    typingEl.remove();
+
+    if (data.success && data.reply) {
+      // Format markdown bold and linebreaks into clean HTML
+      const formatted = data.reply
+        .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
+        .replace(/\*(.*?)\*/g, "<i>$1</i>")
+        .replace(/\n\n/g, "<br><br>")
+        .replace(/\n\* /g, "<br>• ")
+        .replace(/\n- /g, "<br>• ")
+        .replace(/\n/g, "<br>");
+      addMsg(formatted, "bot");
+    } else {
+      // Graceful local fallback
+      addMsg(brain(msg), "bot");
+    }
+  } catch (err) {
+    console.warn("AI Chat API call failed, using fallback:", err);
+    typingEl.remove();
+    addMsg(brain(msg), "bot");
+  }
 }
 
 function quickAsk(q){
-  addMsg(q,"user");
-  setTimeout(()=>addMsg(brain(q),"bot"),400);
+  document.getElementById("userInput").value = q;
+  send();
 }
 
 function brain(msg){
-  msg=msg.toLowerCase();
+  msg = msg.toLowerCase();
 
   if(msg.includes("career")){
-    return `🎯 Career selection depends on interests, skills, aptitude, and market demand.
-    Use <b>IQ Test</b> and <b>Career Recommendation</b> modules for personalized results.`;
+    return `<i class="fa-solid fa-bullseye" style="color: #667eea; margin-right: 6px;"></i><b>Career Selection Guidance:</b><br>
+    Career selection depends on your technical interests, skills, aptitude, and industry demand.
+    Explore the <b>IQ Test</b> and <b>Career Recommendation</b> modules on your dashboard for tailored roadmaps!`;
   }
   if(msg.includes("skill")){
-    return `🛠️ Important skills:
-    <ul><li>Programming (Java, Python)</li><li>Problem Solving</li><li>Communication</li><li>Logical Thinking</li></ul>`;
+    return `<i class="fa-solid fa-screwdriver-wrench" style="color: #667eea; margin-right: 6px;"></i><b>High-Demand Industry Skills:</b>
+    <ul>
+      <li>Programming: Python, JavaScript, Java, C++</li>
+      <li>Data & AI: SQL, Machine Learning, Pandas</li>
+      <li>Core Competencies: Problem Solving & Algorithms</li>
+      <li>Employability: Communication & Git Collaboration</li>
+    </ul>`;
   }
   if(msg.includes("exam")||msg.includes("gate")||msg.includes("cat")){
-    return `📚 Popular exams:
-    <ul><li>GATE – Engineering</li><li>CAT – MBA</li><li>GRE – MS abroad</li><li>Govt Exams</li></ul>`;
+    return `<i class="fa-solid fa-book" style="color: #667eea; margin-right: 6px;"></i><b>Key Competitive Exams:</b>
+    <ul>
+      <li>GATE – M.Tech / PSU recruitments</li>
+      <li>CAT / XAT – MBA & Management Programs</li>
+      <li>GRE / TOEFL – Master's abroad</li>
+      <li>UPSC / State PSC – Government Services</li>
+    </ul>`;
   }
-  if(msg.includes("placement")||msg.includes("job")){
-    return `💼 Placement prep:
-    <ul><li>DSA</li><li>Projects</li><li>Aptitude</li><li>Mock Interviews</li></ul>`;
+  if(msg.includes("placement")||msg.includes("job")||msg.includes("interview")){
+    return `<i class="fa-solid fa-briefcase" style="color: #667eea; margin-right: 6px;"></i><b>Placement & Interview Strategy:</b>
+    <ul>
+      <li>Data Structures & Algorithms (LeetCode/HackerRank)</li>
+      <li>Full-stack portfolio projects with GitHub code</li>
+      <li>ATS-optimized resume (use our built-in Resume ATS tool!)</li>
+      <li>Aptitude speed training & mock interviews</li>
+    </ul>`;
   }
-  if(msg.includes("higher")){
-    return `🎓 Higher studies:
-    <ul><li>M.Tech / MS</li><li>MBA</li><li>PhD</li></ul>`;
+  if(msg.includes("higher")||msg.includes("ms")||msg.includes("mtech")||msg.includes("mba")){
+    return `<i class="fa-solid fa-graduation-cap" style="color: #667eea; margin-right: 6px;"></i><b>Higher Studies Opportunities:</b>
+    <ul>
+      <li>M.Tech / MS in CS, AI, or Data Science</li>
+      <li>MBA in Tech Management or Business Analytics</li>
+      <li>Research & PhD Fellowships</li>
+    </ul>`;
   }
 
-  return `🤖 I’m specialized in career guidance.
-  Please ask about careers, skills, exams, placements, or future planning.`;
+  return `<i class="fa-solid fa-robot" style="color: #667eea; margin-right: 6px;"></i>I am your AI Career Counselor. Ask me about careers, roadmaps, technical skills, competitive exams, resume improvement, or interview prep!`;
 }
 
-document.getElementById("userInput").addEventListener("keypress",e=>{
-  if(e.key==="Enter") send();
+document.getElementById("userInput").addEventListener("keypress", e => {
+  if(e.key === "Enter") send();
 });
 </script>
 
